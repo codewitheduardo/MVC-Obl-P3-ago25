@@ -196,5 +196,3 @@ Debe incluir la URL BASE de la API:
 * Razor Pages
 
 ---
-
-¿O querés un README del **repositorio de la API** que incluya también ambas URLs?
