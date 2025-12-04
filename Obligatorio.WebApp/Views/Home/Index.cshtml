@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+
+    // Obtener el nombre del usuario desde la sesión
+    string? usuario = Context.Session.GetString("Nombre") ?? "Usuario";
+
+    // Obtener la hora actual y generar saludo
+    var hora = DateTime.Now.Hour;
+    var saludo = hora < 12 ? "¡Buenos días" : hora < 18 ? "¡Buenas tardes" : "¡Buenas noches";
+
+    // Obtener mensaje del filtro (query string)
+    var mensaje = Context.Request.Query["mensaje"];
+
+    // Obtener el mensaje de TempData (Error)
+    var mensajeError = TempData["Error"] as string;
+}
+
+<div class="home-container">
+
+    <div class="home-card">
+
+        <!-- Mostrar mensaje de error o filtro -->
+        @if (!string.IsNullOrWhiteSpace(mensaje) || !string.IsNullOrEmpty(mensajeError))
+        {
+            <div id="alertaHome" class="alert alert-danger text-center fw-bold mb-3">
+                @if (!string.IsNullOrWhiteSpace(mensaje))
+                {
+                    @mensaje
+                }
+                else
+                {
+                    @mensajeError
+                }
+            </div>
+        }
+
+        <h1 class="home-title">@saludo, @usuario 👋</h1>
+
+        <p class="home-subtitle">
+            Nos alegra verte nuevamente.<br />
+            Selecciona una opción del menú para continuar.
+        </p>
+    </div>
+</div>
+
+</div>
+
+</div>
+
+<script src="~/js/Home/Index.js"></script>

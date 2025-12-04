@@ -1,0 +1,59 @@
+﻿@model DTOMonto
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Equipos con Pagos Únicos Mayores al Monto";
+}
+
+<div class="equipos-container">
+
+    <h2 class="equipos-title text-center">Equipos con Pagos Únicos Mayores al Monto</h2>
+
+    <form asp-action="EquiposPagosUnicosMayorMonto" method="post" class="equipos-form">
+
+        <div class="equipos-card">
+
+            <div class="form-group mb-3">
+                <label for="Monto" class="form-label">Monto mínimo</label>
+                <input asp-for="Monto" class="form-control equipos-input" type="number" step="0.01" min="0" />
+                <span asp-validation-for="Monto" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn equipos-btn w-100">Buscar</button>
+        </div>
+
+    </form>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger mt-3">
+            @ViewBag.Error
+        </div>
+    }
+
+    @if (Model.Monto > 0 && ViewBag.Equipos != null)
+    {
+        var equipos = (List<EquipoPagoUnicoResponse>)ViewBag.Equipos;
+
+        <h3 class="equipos-subtitle mt-4">Resultados</h3>
+
+        @if (!equipos.Any())
+        {
+            <div class="alert alert-info mt-3">
+                No se encontraron equipos con pagos únicos mayores a ese monto.
+            </div>
+        }
+        else
+        {
+            <div class="equipos-list">
+                @foreach (var e in equipos)
+                {
+                    <div class="equipo-card">
+                        <div class="equipo-id">ID: @e.Id</div>
+                        <div class="equipo-nombre">@e.Nombre</div>
+                    </div>
+                }
+            </div>
+        }
+    }
+</div>

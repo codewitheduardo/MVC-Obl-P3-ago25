@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - MicroSEL</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="icon" href="~/img/favicon.png" type="image/png" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+@{
+        bool logueado = !string.IsNullOrWhiteSpace(Context.Session.GetString("Token"));
+        string? rol = Context.Session.GetString("Rol");
+}
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-figma">
+
+            <div class="nav-left">
+                <a asp-controller="Home" asp-action="Index" class="nav-logo-img">
+                    <img src="~/img/logo-black.svg" alt="MicroSEL" />
+                </a>
+            </div>
+
+            <div class="nav-right">
+                @if (logueado)
+                {
+                    <!-- INICIO -->
+                    <a asp-controller="Home" asp-action="Index" class="nav-item-figma">
+                        <svg class="nav-icon" viewBox="0 0 24 24">
+                            <path d="M3 9.5l9-7 9 7V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V9.5z" />
+                        </svg>
+                        Inicio
+                    </a>
+
+                    <!-- PAGOS -->
+                    @if (rol == "EMPLEADO" || rol == "GERENTE")
+                    {
+                        <a asp-controller="Pago" asp-action="HistorialPagosUsuario" class="nav-item-figma">
+                            <svg class="nav-icon" viewBox="0 0 24 24">
+                                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
+                            </svg>
+                            Pagos
+                        </a>
+                    }
+
+                    <!-- EQUIPOS -->
+                    @if (rol == "GERENTE")
+                    {
+                        <a asp-controller="Equipo" asp-action="EquiposPagosUnicosMayorMonto" class="nav-item-figma">
+                            <svg class="nav-icon" viewBox="0 0 24 24">
+                                <path d="M12 2l9 4v6c0 5.5-3.8 10.8-9 12-5.2-1.2-9-6.5-9-12V6l9-4z" />
+                            </svg>
+                            Equipos
+                        </a>
+                    }
+
+                    <!-- ADMIN -->
+                    @if (rol == "ADMINISTRADOR")
+                    {
+                        <a asp-controller="Usuario" asp-action="ResetPassword" class="nav-item-figma">
+                            <svg class="nav-icon" viewBox="0 0 24 24">
+                                <path d="M12 12a5 5 0 1 0-.001-10.001A5 5 0 0 0 12 12zM4 22v-2c0-2.209 3.582-4 8-4s8 1.791 8 4v2H4z" />
+                            </svg>
+                            Usuarios
+                        </a>
+
+                        <a asp-controller="Auditoria" asp-action="AuditoriaPorGasto" class="nav-item-figma">
+                            <svg class="nav-icon" viewBox="0 0 24 24">
+                                <path d="M3 3h18v2H3zm2 4h14v2H5zm-2 4h18v2H3zm2 4h14v2H5z" />
+                            </svg>
+                            Auditoría
+                        </a>
+                    }
+
+                    <!-- CREAR PAGO -->
+                    <a asp-controller="Pago" asp-action="Create" class="nav-item-figma">
+                        <svg class="nav-icon" viewBox="0 0 24 24">
+                            <path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                        </svg>
+                        Crear Pago
+                    </a>
+
+                    <!-- LOGOUT -->
+                    <a asp-controller="Auth" asp-action="Logout" class="nav-item-figma logout-btn">
+                        <svg class="nav-icon" viewBox="0 0 24 24">
+                            <path d="M16 13v-2H7V8l-5 4 5 4v-3zM20 3h-8v2h8v14h-8v2h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z" />
+                        </svg>
+                        Salir
+                    </a>
+                }
+            </div>
+
+        </nav>
+    </header>
+
+    <!-- Pantalla de carga -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="container main-container">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+        <div class="container text-center">
+            &copy; 2025 - MicroSEL
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

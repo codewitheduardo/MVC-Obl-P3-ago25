@@ -1,0 +1,70 @@
+﻿@model IEnumerable<HistorialPagosUsuarioResponse>
+
+@{
+    ViewData["Title"] = "Historial de Pagos del Usuario";
+}
+
+<div class="pagos-container">
+
+    <h2 class="pagos-title text-center">Historial de Pagos</h2>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info text-center mt-4">
+            No se encontraron pagos para este usuario.
+        </div>
+    }
+    else
+    {
+        <div class="pagos-list">
+            @foreach (var pago in Model)
+            {
+                <div class="pago-card">
+
+                    <div class="pago-header">
+                        <span class="pago-metodo">@pago.MetodoPago</span>
+                        <span class="pago-tipo">@pago.TipoPago</span>
+                    </div>
+
+                    <div class="pago-body">
+
+                        <div class="pago-row">
+                            <span class="pago-label">Gasto</span>
+                            <span class="pago-value">@pago.Gasto</span>
+                        </div>
+
+                        <div class="pago-row">
+                            <span class="pago-label">Monto Final</span>
+                            <span class="pago-value">@pago.MontoFinal.ToString("C")</span>
+                        </div>
+
+                        <div class="pago-row">
+                            <span class="pago-label">Saldo Pendiente</span>
+                            <span class="pago-value">@pago.SaldoPendiente.ToString("C")</span>
+                        </div>
+
+                        <div class="pago-row">
+                            <span class="pago-label">Fecha Inicio</span>
+                            <span class="pago-value">@pago.FechaInicio</span>
+                        </div>
+
+                        <div class="pago-row">
+                            <span class="pago-label">Fecha Fin</span>
+                            <span class="pago-value">
+                                @if (!string.IsNullOrEmpty(pago.FechaFin))
+                                {
+                                    @pago.FechaFin
+                                }
+                                else
+                                {
+                                    <span class="text-muted">–</span>
+                                }
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

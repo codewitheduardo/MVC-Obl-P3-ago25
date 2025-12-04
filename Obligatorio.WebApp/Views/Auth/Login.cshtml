@@ -1,0 +1,59 @@
+﻿@model HTTPCLIENTE_M3C_IMEM.Models.DTOLogin
+
+@{
+    ViewData["Title"] = "Login";
+    var mensaje = Context.Request.Query["mensaje"];
+}
+
+<body class="login-page">
+
+    <div class="login-container">
+
+        <div class="login-card login-card-tight">
+
+            <!-- LOGO -->
+            <div class="login-logo">
+                <img src="~/img/logo-black.svg" alt="MicroSEL" />
+            </div>
+
+            <!-- Mostrar el mensaje de error desde ViewBag -->
+            @if (ViewBag.Error != null)
+            {
+                <div id="alertaLogin" class="alert alert-danger text-center fw-bold mb-3">
+                    @ViewBag.Error
+                </div>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(mensaje))
+            {
+                <div id="alertaLogin" class="alert alert-warning text-center fw-bold mb-3">
+                    @mensaje
+                </div>
+            }
+
+            <form asp-action="Login" class="login-form">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Correo" class="form-label"></label>
+                    <input asp-for="Correo" class="form-control login-input" />
+                    <span asp-validation-for="Correo" class="text-danger small"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" type="password" class="form-control login-input" />
+                    <span asp-validation-for="Password" class="text-danger small"></span>
+                </div>
+
+                <button type="submit" class="btn login-btn w-100">Ingresar</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="~/js/Auth/Login.js"></script>
+</body>

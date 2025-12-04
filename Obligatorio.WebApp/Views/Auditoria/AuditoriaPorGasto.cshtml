@@ -1,0 +1,64 @@
+﻿@model AuditoriaGastoVM
+
+@{
+    ViewData["Title"] = "Auditoría de Gasto";
+}
+
+<div class="auditoria-container">
+
+    <h2 class="auditoria-title text-center">Auditoría de Gasto</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger fw-bold text-center">@ViewBag.Error</div>
+    }
+
+    <form asp-action="AuditoriaPorGasto" method="post" class="auditoria-card">
+
+        <label class="form-label">Seleccione un gasto:</label>
+        <select asp-for="IdGastoSeleccionado" class="form-select auditoria-input">
+            <option value="">Seleccione...</option>
+            @foreach (var gasto in Model.TodosLosGastos)
+            {
+                <option value="@gasto.Id">@gasto.Nombre</option>
+            }
+        </select>
+
+        <button class="btn auditoria-btn w-100 mt-3">Consultar Auditoría</button>
+
+    </form>
+
+    @if (Model.Auditorias != null && Model.Auditorias.Any())
+    {
+        <h3 class="auditoria-subtitle mt-4">Resultados</h3>
+
+        <div class="auditoria-list">
+            @foreach (var a in Model.Auditorias)
+            {
+                <div class="auditoria-item">
+
+                    <div class="auditoria-row">
+                        <span class="auditoria-label">Operación</span>
+                        <span class="auditoria-value">@a.Accion</span>
+                    </div>
+
+                    <div class="auditoria-row">
+                        <span class="auditoria-label">Usuario</span>
+                        <span class="auditoria-value">@a.Autor</span>
+                    </div>
+
+                    <div class="auditoria-row">
+                        <span class="auditoria-label">Fecha</span>
+                        <span class="auditoria-value">@a.Fecha.ToString("dd MMM yyyy HH:mm")</span>
+                    </div>
+
+                </div>
+            }
+        </div>
+    }
+    else if (Model.IdGastoSeleccionado != 0)
+    {
+        <div class="alert alert-info text-center">No hay auditorías registradas para este gasto.</div>
+    }
+
+</div>
