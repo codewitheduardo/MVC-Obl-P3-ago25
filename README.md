@@ -6,7 +6,7 @@ El Cliente MVC es una aplicación web desarrollada en **ASP.NET MVC (.NET 8)** q
 Permite a los usuarios autenticarse, registrar pagos, consultar reportes y administrar la información del sistema según su rol: Administrador, Gerente o Empleado.
 
 👉 La Web API utilizada por este cliente se encuentra en un repositorio separado:
-`https://github.com/codewitheduardo/API-Obl-P3-ago25` *(reemplazar con el real)*
+`https://github.com/codewitheduardo/API-Obl-P3-ago25`
 
 ✔ Comunicación con la API mediante JWT
 ✔ Manejo de sesión
@@ -183,7 +183,7 @@ Debe incluir la URL BASE de la API:
 | Proyecto                           | Repositorio                                                      |
 | ---------------------------------- | ---------------------------------------------------------------- |
 | **Web API**                        | `https://github.com/codewitheduardo/API-Obl-P3-ago25`            |
-| **Cliente MVC (este repositorio)** | `https://github.com/codewitheduardo/MVC-Obl-P3-ago25*`           |
+| **Cliente MVC (este repositorio)** | `https://github.com/codewitheduardo/MVC-Obl-P3-ago25`           |
 
 ---
 
