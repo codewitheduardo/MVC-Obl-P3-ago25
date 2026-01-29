@@ -38,8 +38,11 @@ La aplicación se encuentra funcionando 100% en la nube.
 ```
 
 ✔ Token JWT almacenado en Session
+
 ✔ Requests HTTP firmadas con `Authorization: Bearer <token>`
+
 ✔ Manejo de errores y reintentos
+
 ✔ Validaciones en servidor y cliente
 
 ---
