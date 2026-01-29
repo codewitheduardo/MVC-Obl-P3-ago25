@@ -9,8 +9,11 @@ Permite a los usuarios autenticarse, registrar pagos, consultar reportes y admin
 `https://github.com/codewitheduardo/API-Obl-P3-ago25`
 
 ✔ Comunicación con la API mediante JWT
+
 ✔ Manejo de sesión
+
 ✔ Uso de servicios HttpClient para todas las operaciones
+
 ✔ Interfaz responsive con Bootstrap
 
 ---
@@ -155,13 +158,9 @@ Debe incluir la URL BASE de la API:
 
 ```json
 {
-  "ApiBaseUrl": "https://TU-API.azurewebsites.net/api"
+  "ApiBaseUrl": "https://obligatoriowebapi20251119220526-e2avfegbfnh3gbda.canadacentral-01.azurewebsites.net/api"
 }
 ```
-
-*(Pegar aquí la URL real de tu API)*
-
----
 
 # ☁️ Deploy en Azure
 
